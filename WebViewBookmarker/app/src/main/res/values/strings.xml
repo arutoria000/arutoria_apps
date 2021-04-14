@@ -1,3 +1,8 @@
 <resources>
+    <!-- app main -->
     <string name="app_name">WebViewBookmarker</string>
+
+    <!-- app top -->
+    <string name="search_bar_hint_message">Webで検索</string>
+
 </resources>
