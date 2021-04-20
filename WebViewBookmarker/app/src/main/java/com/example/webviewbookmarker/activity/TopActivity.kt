@@ -1,11 +1,16 @@
 package com.example.webviewbookmarker.activity
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.RecyclerView
 import com.example.webviewbookmarker.R
 import com.example.webviewbookmarker.fragment.CustomTabsWebViewFragment
+import java.util.zip.Inflater
 
 /**
  * トップ画面.
@@ -27,6 +32,7 @@ class TopActivity: AppCompatActivity(), CustomTabsWebViewFragment.OnEditStateCha
             CustomTabsWebViewFragment(this), "CustomTabsWebViewFragment")
         fragmentTransient.commit()
         mMotionLayout = findViewById(R.id.motion_layout_top_activity)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerview_top_web_contents)
     }
 
     override fun onViewFocus() {

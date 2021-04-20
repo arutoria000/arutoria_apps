@@ -30,6 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
+                android:id="@+id/text_view_web_contents_title"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/web_contents_text_heigth"
                 android:background="@color/web_contents_text_view_background_color_set_red"
