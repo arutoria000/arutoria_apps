@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.webviewbookmarker.R
@@ -18,7 +19,7 @@ import com.example.webviewbookmarker.view.BaseCustomWebViewClient
 /**
  * カスタムWebView本体.
  */
-class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeListener): Fragment() {
+class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeListener): Fragment(), BaseCustomWebViewClient.OnPageLoadStateChangeListener {
 
     /**
      * EditTextの選択状態リスナー.
@@ -41,6 +42,11 @@ class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeList
     private val mOnEditStateChangeListener: OnEditStateChangeListener = onEditStateChangeListener
 
     /**
+     * ルートView.
+     */
+    private lateinit var mRootView: View
+
+    /**
      * EditText本体.
      */
     private lateinit var mEditText: EditText
@@ -50,29 +56,32 @@ class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeList
      */
     private lateinit var mWebView: WebView
 
+    /**
+     * OnBackPressedCallback.
+     */
+    private lateinit var mCallbacks: OnBackPressedCallback
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         // バックキーの操作をフラグメントでキャッチする
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            mEditText.isFocusable = false
-            mOnEditStateChangeListener.onViewHideFocus()
+        mCallbacks = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            closeSerachBar()
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // root取得
-        val view: View = inflater.inflate(R.layout.fragment_custom_tabs_webview, container, false)
-        initializeEditText(view)
-        initializeWebView(view)
-        return view
+        mRootView = inflater.inflate(R.layout.fragment_custom_tabs_webview, container, false)
+        initializeEditText()
+        initializeWebView()
+        return mRootView
     }
 
     /**
      * WebViewの初期化処理.
-     * @param rootView View
      */
-    private fun initializeWebView(rootView: View) {
-        mWebView = rootView.findViewById<WebView>(R.id.webview_layout)
+    private fun initializeWebView() {
+        mWebView = mRootView.findViewById(R.id.webview_layout)
         mWebView.settings.javaScriptEnabled = true
         mWebView.settings.loadWithOverviewMode = true
         mWebView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
@@ -80,17 +89,17 @@ class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeList
         mWebView.settings.javaScriptCanOpenWindowsAutomatically = false
         mWebView.isVerticalScrollBarEnabled = false
         mWebView.isHorizontalScrollBarEnabled = false
-        mWebView.settings.builtInZoomControls = true
-        mWebView.webViewClient = BaseCustomWebViewClient()
+        mWebView.webViewClient = BaseCustomWebViewClient(this)
     }
 
     /**
      * EditTextの初期化処理.
-     * @param rootView View
      */
-    private fun initializeEditText(rootView: View) {
+    private fun initializeEditText() {
         // EditText取得
-        mEditText = rootView.findViewById(R.id.edit_text_search_bar)
+        mEditText = mRootView.findViewById(R.id.edit_text_search_bar)
+        mEditText.visibility = View.VISIBLE
+        mEditText.text.clear()
         mEditText.setOnFocusChangeListener { edit, hasFocus ->
             // フォーカスの状態を保持
             val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -98,12 +107,12 @@ class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeList
             if (hasFocus) {
                 // フォーカスされた場合
                 mOnEditStateChangeListener.onViewFocus()
+                mCallbacks.isEnabled = true
                 inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS)
             } else {
                 // フォーカスを外した場合
-                mOnEditStateChangeListener.onViewHideFocus()
                 inputMethodManager.hideSoftInputFromWindow(edit.windowToken, 0)
-                mEditText.text.clear()
+                closeSerachBar()
             }
         }
         // クリックリスナー設定
@@ -134,7 +143,39 @@ class CustomTabsWebViewFragment(onEditStateChangeListener: OnEditStateChangeList
         mEditText.setOnKeyListener(null)
         mEditText.setOnClickListener(null)
         mWebView.visibility = View.VISIBLE
+        // URLのロード
         mWebView.loadUrl(getString(R.string.search_google_url) + param)
+        // バックキー制御のためのキーリスナー設定
+        mWebView.setOnKeyListener { _, keyCode, event ->
+            (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN).apply {
+                if (mWebView.canGoBack()) {
+                    // 戻ることができる履歴が存在する
+                    mWebView.goBack()
+                } else {
+                    // 戻ることができる履歴が存在しない
+                    closeSerachBar()
+                }
+            }
+        }
     }
 
+    /**
+     * 検索バーを閉じる時の処理.
+     */
+    private fun closeSerachBar() {
+        mWebView.setOnKeyListener(null)
+        mWebView.visibility = View.GONE
+        initializeEditText()
+        mEditText.isFocusable = false
+        mOnEditStateChangeListener.onViewHideFocus()
+        mCallbacks.isEnabled = false
+    }
+
+    override fun onPageLoadStart() {
+        // プログレスバーの表示
+    }
+
+    override fun onPageLoadFinish() {
+        // プログレスバーの非表示
+    }
 }

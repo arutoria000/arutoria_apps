@@ -10,4 +10,11 @@
 
     <!-- app color -->
     <color name="top_backgraund_color">#C0C0C0</color>
+    <color name="web_contents_card_view_background_color_set_green">#008000</color>
+    <color name="web_contents_text_view_background_color_set_green">#006400</color>
+    <color name="web_contents_card_view_background_color_set_red">#A52A2A</color>
+    <color name="web_contents_text_view_background_color_set_red">#8B0000</color>
+    <color name="web_contents_card_view_background_color_set_blue">#0000CD</color>
+    <color name="web_contents_text_view_background_color_set_blue">#00008B</color>
+
 </resources>
