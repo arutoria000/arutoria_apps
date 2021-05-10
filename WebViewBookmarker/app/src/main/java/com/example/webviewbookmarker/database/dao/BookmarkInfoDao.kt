@@ -1,5 +1,6 @@
 package com.example.webviewbookmarker.database.dao
 
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.webviewbookmarker.database.room.BookmarkInfo
 
@@ -9,16 +10,28 @@ import com.example.webviewbookmarker.database.room.BookmarkInfo
 @Dao
 interface BookmarkInfoDao {
 
-    @Query("SELECT * FROM bookmarkinfo")
-    fun getAllBookmarkInfo() : List<BookmarkInfo>
+    /**
+     * 全件取得.
+     */
+    @Query("SELECT * FROM BookmarkInfo")
+    suspend fun getAllBookmarkInfo() : List<BookmarkInfo>
 
+    /**
+     * 1件追加.
+     */
     @Insert
-    fun insert(bookmarkInfo: BookmarkInfo)
+    suspend fun insert(bookmarkInfo: BookmarkInfo)
 
+    /**
+     * 1件更新.
+     */
     @Update
-    fun update(bookmarkInfo: BookmarkInfo)
+    suspend fun update(bookmarkInfo: BookmarkInfo)
 
+    /**
+     * 1件削除.
+     */
     @Delete
-    fun delete(bookmarkInfo: BookmarkInfo)
+    suspend fun delete(bookmarkInfo: BookmarkInfo)
 
 }

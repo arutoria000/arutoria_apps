@@ -9,10 +9,24 @@ import androidx.room.PrimaryKey
 @Entity
 data class BookmarkInfo (
 
+    /**
+     * 主キー(int).
+     */
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
+    /**
+     * WebURL.
+     */
     val web_url: String,
 
-    val icon_path: String
+    /**
+     * アイコンパス.
+     */
+    val icon_path: String,
+
+    /**
+     * ブックマークのテキスト.
+     */
+    val top_text: String
 )
