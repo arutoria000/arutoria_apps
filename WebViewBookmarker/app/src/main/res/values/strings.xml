@@ -5,5 +5,11 @@
     <!-- app top -->
     <string name="search_bar_hint_message">Webで検索</string>
     <string name="search_google_url">https://www.google.com/search?q=</string>
+    <string name="search_default_url">https://www.google.com</string>
+    <string name="search_default_icon_path">ic_web_contents_image_bookmarks</string>
+    <string name="search_default_text">デフォルトブックマークアイコン</string>
+
+    <!-- Preferences Key Name -->
+    <string name="shared_preferences_key_first_session_data_insert">shared_preferences_key_first_session_data_insert</string>
 
 </resources>

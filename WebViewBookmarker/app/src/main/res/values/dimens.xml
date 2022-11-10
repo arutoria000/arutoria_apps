@@ -21,5 +21,6 @@
     <dimen name="web_contents_cardview_elevation">3dp</dimen>
     <dimen name="web_contents_image_radius">5dp</dimen>
     <dimen name="web_contents_image_elevation">3dp</dimen>
+    <dimen name="web_contents_parent_view_top_margin">100dp</dimen>
 
 </resources>
