@@ -1,32 +1,35 @@
 package com.example.webviewbookmarker.activity
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.fragment.app.FragmentTransaction
 import com.example.webviewbookmarker.R
+import com.example.webviewbookmarker.fragment.CustomTabsWebViewFragment
 
 /**
  * トップ画面.
  */
-class TopActivity : AppCompatActivity() {
+class TopActivity : AppCompatActivity(), CustomTabsWebViewFragment.OnEditStateChangeListener {
+
+    private lateinit var mMotionLayout : MotionLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // view設定
         setContentView(R.layout.activity_top)
+
+        val fragmentTransient :FragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransient.add(R.id.custom_tabs_fragment_container, CustomTabsWebViewFragment(this), "CustomTabsWebViewFragment")
+        fragmentTransient.commit()
+        mMotionLayout = findViewById(R.id.motion_layout_top_activity)
     }
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+    override fun onViewFocus() {
+        mMotionLayout.transitionToEnd()
+    }
 
-        val view : View = findViewById(R.id.fab_search_button)
-        view.setOnClickListener{
-            val intent = Intent(this, CustomTabsActivity::class.java)
-            startActivity(intent)
-        }
-
-        return view
+    override fun onViewHideFocus() {
+        mMotionLayout.transitionToStart()
     }
 }

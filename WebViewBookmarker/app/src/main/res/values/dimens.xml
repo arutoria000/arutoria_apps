@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="tool_bar_color_elevation">4dp</dimen>
-    <dimen name="floating_action_button_bottom_margin">10dp</dimen>
-    <dimen name="floating_action_button_size">60dp</dimen>
+    <!-- app top -->
+    <dimen name="search_bar_heigth">50dp</dimen>
+    <dimen name="search_bar_width">320dp</dimen>
+    <dimen name="search_bar_top_margin">30dp</dimen>
+    <dimen name="search_bar_edit_text_radius">10dp</dimen>
+    <dimen name="search_bar_area_open_radius">20dp</dimen>
+    <dimen name="search_bar_area_open_margin">5dp</dimen>
+    <dimen name="search_bar_area_open_bottom_margin">20dp</dimen>
 
 </resources>

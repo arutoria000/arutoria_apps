@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/edit_text_search_selector">
+
+    <EditText
+        android:id="@+id/edit_text_search_bar"
+        android:layout_width="@dimen/search_bar_width"
+        android:layout_height="@dimen/search_bar_heigth"
+        android:autofillHints="@string/search_bar_hint_message"
+        android:background="@drawable/edit_text_search_selector"
+        android:focusableInTouchMode="true"
+        android:hint="@string/search_bar_hint_message"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

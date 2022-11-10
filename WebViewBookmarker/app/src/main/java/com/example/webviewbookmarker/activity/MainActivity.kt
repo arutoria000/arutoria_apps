@@ -15,5 +15,6 @@ class MainActivity : AppCompatActivity() {
         // トップ画面を起動
         val intent = Intent(this, TopActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
