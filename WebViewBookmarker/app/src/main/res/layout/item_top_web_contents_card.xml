@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/web_contents_cardview_width"
+        android:layout_height="@dimen/web_contents_cardview_heigth"
+        app:cardCornerRadius="@dimen/web_contents_cardview_radius"
+        card_view:cardElevation="@dimen/web_contents_cardview_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/image_view_web_contents_icon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/web_contents_image_heigth"
+                android:background="@drawable/web_contents_image_selector"
+                android:elevation="@dimen/web_contents_image_elevation"
+                android:src="@drawable/ic_web_contents_image_bookmarks"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/web_contents_text_heigth"
+                android:background="@color/web_contents_text_view_background_color_set_red"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="14dp"
+                android:maxLines="2"
+                android:fallbackLineSpacing="false"
+                app:layout_constraintTop_toBottomOf="@+id/image_view_web_contents_icon"/>
+
+            <View
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:background="@drawable/web_contents_image_border"
+                app:layout_constraintTop_toTopOf="@+id/image_view_web_contents_icon"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_web_contents_icon"
+                app:layout_constraintStart_toStartOf="@id/image_view_web_contents_icon"
+                app:layout_constraintEnd_toEndOf="@id/image_view_web_contents_icon"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
