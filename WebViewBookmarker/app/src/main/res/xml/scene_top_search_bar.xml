@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/search_bar_area_open_margin"
             android:layout_marginStart="@dimen/search_bar_area_open_margin"
             android:layout_marginEnd="@dimen/search_bar_area_open_margin"
-            android:layout_marginBottom="@dimen/search_bar_area_open_bottom_margin"
+            android:layout_marginBottom="@dimen/search_bar_area_open_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

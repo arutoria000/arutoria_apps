@@ -4,5 +4,6 @@
 
     <!-- app top -->
     <string name="search_bar_hint_message">Webで検索</string>
+    <string name="search_google_url">https://www.google.com/search?q=</string>
 
 </resources>

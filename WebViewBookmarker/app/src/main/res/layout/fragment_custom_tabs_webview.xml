@@ -21,4 +21,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <WebView
+        android:id="@+id/webview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/edit_text_search_selector"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
