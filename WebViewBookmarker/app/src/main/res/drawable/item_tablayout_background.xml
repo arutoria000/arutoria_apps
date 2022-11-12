@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@color/tab_base_color"/>
+    </item>
+    <item android:bottom="@dimen/tablayout_padding" android:left="@dimen/tablayout_padding"
+        android:right="@dimen/tablayout_padding" android:top="@dimen/tablayout_padding">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/tab_innar_color" />
+            <corners android:radius="@dimen/tab_indicator_radius" />
+        </shape>
+        <color android:color="@color/tab_base_color"/>
+    </item>
+</layer-list>
